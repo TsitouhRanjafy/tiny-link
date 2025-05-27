@@ -2,32 +2,33 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { ENDPOINTS } from 'src/constants/endpoint';
 
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
-  @Post()
+  @Post(ENDPOINTS.CREATE)
   create(@Body() createUserDto: CreateUserDto) {
     return this.usersService.create(createUserDto);
   }
 
-  @Get()
+  @Get(ENDPOINTS.GETALL)
   findAll() {
     return this.usersService.findAll();
   }
 
-  @Get(':id')
+  @Get(ENDPOINTS.GETONE)
   findOne(@Param('id') id: string) {
     return this.usersService.findOne(+id);
   }
 
-  @Patch(':id')
+  @Patch(ENDPOINTS.UPDATEONE)
   update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
     return this.usersService.update(+id, updateUserDto);
   }
 
-  @Delete(':id')
+  @Delete(ENDPOINTS.DELETEONE)
   remove(@Param('id') id: string) {
     return this.usersService.remove(+id);
   }

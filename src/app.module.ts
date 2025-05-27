@@ -12,7 +12,6 @@ import { LinkLogsModule } from './link-logs/link-logs.module';
     LinksModule,
     VisitorModule,
     LinkLogsModule,
-
   ],
   controllers: [AppController],
   providers: [AppService],

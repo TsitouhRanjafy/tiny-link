@@ -2,32 +2,33 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { LinkLogsService } from './link-logs.service';
 import { CreateLinkLogDto } from './dto/create-link-log.dto';
 import { UpdateLinkLogDto } from './dto/update-link-log.dto';
+import { ENDPOINTS } from 'src/constants/endpoint';
 
 @Controller('link-logs')
 export class LinkLogsController {
   constructor(private readonly linkLogsService: LinkLogsService) {}
 
-  @Post()
+  @Post(ENDPOINTS.CREATE)
   create(@Body() createLinkLogDto: CreateLinkLogDto) {
     return this.linkLogsService.create(createLinkLogDto);
   }
 
-  @Get()
+  @Get(ENDPOINTS.GETALL)
   findAll() {
     return this.linkLogsService.findAll();
   }
 
-  @Get(':id')
+  @Get(ENDPOINTS.GETONE)
   findOne(@Param('id') id: string) {
     return this.linkLogsService.findOne(+id);
   }
 
-  @Patch(':id')
+  @Patch(ENDPOINTS.UPDATEONE)
   update(@Param('id') id: string, @Body() updateLinkLogDto: UpdateLinkLogDto) {
     return this.linkLogsService.update(+id, updateLinkLogDto);
   }
 
-  @Delete(':id')
+  @Delete(ENDPOINTS.DELETEONE)
   remove(@Param('id') id: string) {
     return this.linkLogsService.remove(+id);
   }
