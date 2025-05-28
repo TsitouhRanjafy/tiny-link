@@ -8,7 +8,7 @@ export const databaseProviders = [
         inject: [ConfigService],
         useFactory: async (configService: ConfigService) => {
             const dataSource = new DataSource({
-                type: configService.getOrThrow<"postgres" | "mysql" | "mongodb" | "oracle">("TYPE"),
+                type: "postgres",
                 host: configService.getOrThrow<string>('HOST'),
                 port: configService.getOrThrow<number>('PORT'),
                 username: configService.getOrThrow<string>('USERNAME'),
