@@ -6,6 +6,7 @@ import { LinksModule } from './links/links.module';
 import { VisitorModule } from './visitor/visitor.module';
 import { LinkLogsModule } from './link-logs/link-logs.module';
 import { ConfigModule } from '@nestjs/config';
+import { RedisModule } from './redis/redis.module';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { ConfigModule } from '@nestjs/config';
     LinksModule,
     VisitorModule,
     LinkLogsModule,
+    RedisModule,
   ],
   controllers: [AppController],
   providers: [AppService],

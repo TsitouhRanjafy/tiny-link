@@ -1,6 +1,7 @@
 import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { User } from "src/users/entities/user.entity";
 import { LinkLog } from "src/link-logs/entities/link-log.entity";
+import { Visitor } from "src/visitor/entities/visitor.entity";
 
 @Entity()
 export class Link {
@@ -16,6 +17,9 @@ export class Link {
     })
     tinyLink: string
 
+    @Column({ type: "boolean", default: true })
+    actived: boolean
+
     @Column({ type: "boolean", default: false })
     secured: boolean
 
@@ -30,6 +34,9 @@ export class Link {
 
     @OneToMany(() => LinkLog, (linklog) => linklog.link)
     logs: LinkLog[]
+
+    @OneToMany(() => Visitor,(visitor) => visitor.link)
+    visitors: Visitor[]
 }
 
 

@@ -1,5 +1,5 @@
 import { Link } from "src/links/entities/link.entity";
-import { Column, JoinTable, ManyToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, JoinTable, ManyToMany, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 export class Visitor {
     @PrimaryGeneratedColumn()
@@ -20,9 +20,8 @@ export class Visitor {
     @Column({ type: "varchar",unique: true })
     mac: string
 
-    @ManyToMany(() => Link)
-    @JoinTable()
-    links: Link[]
+    @ManyToOne(() => Link, (link) => link.visitors)
+    link: Link
 }
 
 
