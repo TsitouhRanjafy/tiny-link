@@ -12,7 +12,6 @@ export class Link {
     originLink: string
 
     @Column({
-        type: "varchar2",
         unique: true
     })
     tinyLink: string

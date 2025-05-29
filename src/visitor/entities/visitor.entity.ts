@@ -1,6 +1,7 @@
 import { Link } from "src/links/entities/link.entity";
-import { Column, JoinTable, ManyToMany, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
+@Entity()
 export class Visitor {
     @PrimaryGeneratedColumn()
     id: number

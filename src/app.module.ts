@@ -11,7 +11,7 @@ import { RedisModule } from './redis/redis.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
-      envFilePath: '.development.env',
+      envFilePath: '.env',
       isGlobal: true
     }),
     UsersModule,

@@ -1,6 +1,7 @@
 import { Link } from "src/links/entities/link.entity";
-import { Column, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
+@Entity()
 export class LinkLog {
     @PrimaryGeneratedColumn()
     id: number
