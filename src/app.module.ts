@@ -1,13 +1,16 @@
-import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { ConfigModule } from '@nestjs/config';
+import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
+
 import { UsersModule } from './users/users.module';
 import { LinksModule } from './links/links.module';
 import { VisitorModule } from './visitor/visitor.module';
 import { LinkLogsModule } from './link-logs/link-logs.module';
-import { ConfigModule } from '@nestjs/config';
-import { RedisModule } from './redis/redis.module';
+
 import { AuthMiddleware } from './middleware/auth.middleware';
+import { AppCacheModule } from './cache/caching.module';
+
 
 @Module({
   imports: [
@@ -15,11 +18,11 @@ import { AuthMiddleware } from './middleware/auth.middleware';
       envFilePath: '.env',
       isGlobal: true
     }),
+    AppCacheModule,
     UsersModule,
     LinksModule,
     VisitorModule,
     LinkLogsModule,
-    RedisModule,
   ],
   controllers: [AppController],
   providers: [AppService],
