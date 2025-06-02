@@ -7,10 +7,10 @@ import { UsersModule } from './module/users/users.module';
 import { LinksModule } from './module/links/links.module';
 import { VisitorModule } from './module/visitor/visitor.module';
 import { LinkLogsModule } from './module/link-logs/link-logs.module';
+import { AuthModule } from './module/auth/auth.module';
 
 import { AuthMiddleware } from './middleware/auth.middleware';
 import { AppCacheModule } from './cache/caching.module';
-import { AuthModule } from './auth/auth.module';
 import { HashService } from './common/service/hash.service';
 
 
