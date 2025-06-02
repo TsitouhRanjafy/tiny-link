@@ -15,6 +15,10 @@ export class UsersController {
     return this.usersService.create(newUser);
   }
 
+  async signIn(){
+    
+  }
+
   // Middleware for admin
   @Get(ENDPOINTS.GETALL)
   findAll() {
@@ -24,7 +28,7 @@ export class UsersController {
   // Middleware for auth user
   @Get(ENDPOINTS.GETONE)
   findOne(@Param('id') id: string) {
-    return this.usersService.findOne(+id);
+    return this.usersService.findOneById(+id);
   }
 
   // Middleware for auth user

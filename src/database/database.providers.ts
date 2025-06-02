@@ -1,8 +1,8 @@
 import { ConfigService } from "@nestjs/config";
-import { LinkLog } from "src/link-logs/entities/link-log.entity";
-import { Link } from "src/links/entities/link.entity";
-import { User } from "src/users/entities/user.entity";
-import { Visitor } from "src/visitor/entities/visitor.entity";
+import { LinkLog } from "src/module/link-logs/entities/link-log.entity";
+import { Link } from "src/module/links/entities/link.entity";
+import { User } from "src/module/users/entities/user.entity";
+import { Visitor } from "src/module/visitor/entities/visitor.entity";
 import { DataSource } from "typeorm";
 
 

@@ -16,12 +16,20 @@ export class UsersService {
     return this.userRepository.save(createUserDto);
   }
 
+  signIn(user: Omit<CreateUserDto,"fullname">){
+    
+  }
+
   findAll() {
     return this.userRepository.find();
   }
 
-  findOne(id: number) {
+  findOneById(id: number) {
     return this.userRepository.findOne({ where: { id } });
+  }
+
+  findOneByEmail(email: string) {
+    return this.userRepository.findOne({ where: { email } });
   }
 
   update(id: number, updateUserDto: UpdateUserDto) {

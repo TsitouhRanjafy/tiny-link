@@ -1,7 +1,7 @@
 import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
-import { User } from "src/users/entities/user.entity";
-import { LinkLog } from "src/link-logs/entities/link-log.entity";
-import { Visitor } from "src/visitor/entities/visitor.entity";
+import { User } from "src/module/users/entities/user.entity";
+import { LinkLog } from "src/module/link-logs/entities/link-log.entity";
+import { Visitor } from "src/module/visitor/entities/visitor.entity";
 
 @Entity()
 export class Link {
