@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
@@ -8,17 +8,6 @@ import { ENDPOINTS } from 'src/constants/endpoint';
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
-  @Post(ENDPOINTS.CREATE)
-  create(@Body() createUserDto: CreateUserDto) {
-    const passwordHashed = ""; // Hashe Password
-    const newUser: CreateUserDto = new CreateUserDto(createUserDto.fullname,createUserDto.email,passwordHashed);
-    return this.usersService.create(newUser);
-  }
-
-  async signIn(){
-    
-  }
-
   // Middleware for admin
   @Get(ENDPOINTS.GETALL)
   findAll() {
@@ -26,19 +15,24 @@ export class UsersController {
   }
 
   // Middleware for auth user
-  @Get(ENDPOINTS.GETONE)
-  findOne(@Param('id') id: string) {
+  @Get(ENDPOINTS.GETONE+"/:id")
+  findOneById(@Param('id') id: string) {
     return this.usersService.findOneById(+id);
   }
 
+  @Get(ENDPOINTS.GETONE)
+  findOneByEmail(@Query('email') email: string){
+    return this.usersService.findOneByEmail(email);
+  }
+
   // Middleware for auth user
-  @Patch(ENDPOINTS.UPDATEONE)
+  @Patch(ENDPOINTS.UPDATEONE+"/:id")
   update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
     return this.usersService.update(+id, updateUserDto);
   }
 
   // Middleware for auth user
-  @Delete(ENDPOINTS.DELETEONE)
+  @Delete(ENDPOINTS.DELETEONE+"/:id")
   remove(@Param('id') id: string) {
     return this.usersService.remove(+id);
   }

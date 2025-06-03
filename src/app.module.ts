@@ -11,7 +11,7 @@ import { AuthModule } from './module/auth/auth.module';
 
 import { AuthMiddleware } from './middleware/auth.middleware';
 import { AppCacheModule } from './cache/caching.module';
-import { HashService } from './common/service/hash.service';
+import { HashService } from './common/hash/hash.service';
 
 
 @Module({

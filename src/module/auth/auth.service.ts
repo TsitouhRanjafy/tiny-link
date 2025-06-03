@@ -1,5 +1,6 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
+import { HashService } from 'src/common/hash/hash.service';
 import { CreateUserDto } from 'src/module/users/dto/create-user.dto';
 import { UsersService } from 'src/module/users/users.service';
 
@@ -7,7 +8,8 @@ import { UsersService } from 'src/module/users/users.service';
 export class AuthService {
     constructor(
         private usersService: UsersService,
-        private jwtService: JwtService
+        private jwtService: JwtService,
+        private hashService: HashService
     ){}
 
     async signIn(currentUser: Omit<CreateUserDto,"fullname">){
@@ -23,8 +25,8 @@ export class AuthService {
 
     async signUp(user: Omit<CreateUserDto,"id">){
         const IsUserExistAlready: CreateUserDto | null = await this.usersService.findOneByEmail(user.email)
-        if (!IsUserExistAlready) return; // thow
-        const password = "password crypted" // use bcrypt
+        if (IsUserExistAlready) return; // thow
+        const password = await this.hashService.hash(user.password);
         return this.usersService.create({...user, password});
     }
 }
