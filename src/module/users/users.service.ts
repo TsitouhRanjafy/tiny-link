@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { CreateUserDto } from './dto/create-user.dto';
+import { CreateUserDto, UserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { Repository } from 'typeorm';
 import { User } from './entities/user.entity';
@@ -12,11 +12,11 @@ export class UsersService {
     private readonly userRepository: Repository<User>
   ){}
 
-  create(createUserDto: CreateUserDto) {
-    return this.userRepository.save(createUserDto);
+  create(userDto: CreateUserDto) {
+    return this.userRepository.save(userDto);
   }
 
-  signIn(user: Omit<CreateUserDto,"fullname">){
+  signIn(user: Omit<UserDto,"fullname">){
     
   }
 

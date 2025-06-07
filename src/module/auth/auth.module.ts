@@ -5,9 +5,17 @@ import { UsersService } from '../users/users.service';
 import { UsersModule } from '../users/users.module';
 import { JwtModule } from '@nestjs/jwt';
 import { HashModule } from 'src/common/hash/hash.module';
+import { ConfigService } from '@nestjs/config';
 
 @Module({
-  imports: [UsersModule,JwtModule,HashModule],
+  imports: [
+    UsersModule,
+    JwtModule.register({
+      secret: process.env.SECRET_JWT_KEYSECRET_JWT_KEY,
+      signOptions: { expiresIn: '24h' }
+    }),
+    HashModule
+  ],
   controllers: [AuthController],
   providers: [AuthService]
 })
