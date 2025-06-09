@@ -20,26 +20,20 @@ export class UsersController {
     private readonly usersService: UsersService,
   ) {}
 
-  @Get(ENDPOINTS.GETALL)
-  @UseGuards(RoleGuardService)
-  findAll() {
-    return this.usersService.findAll();
-  }
-
   @UseGuards(AuthGuardService)
-  @Get(ENDPOINTS.GETONE)
+  @Get('/profile')
   findOneById(@User() user: any) {
     return this.usersService.findOneById(user.id);
   }
 
   @UseGuards(AuthGuardService)
-  @Patch(ENDPOINTS.UPDATEONE)
+  @Patch('/update')
   update(@User() user: any, @Body() updateUserDto: UpdateUserDto) {
     return this.usersService.update(user.id, updateUserDto);
   }
 
   @UseGuards(AuthGuardService)
-  @Delete(ENDPOINTS.DELETEONE)
+  @Delete('/delete/me')
   remove(@User() user: any) {
     return this.usersService.remove(user.id);
   }
