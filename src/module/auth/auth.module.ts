@@ -9,7 +9,10 @@ import { HashModule } from 'src/common/hash/hash.module';
   imports: [
     UsersModule,
     HashModule,
-    JwtModule
+    JwtModule.register({
+      secret: 'SECRET_KEY',
+      signOptions: { expiresIn: '24h' }
+    })
   ],
   controllers: [AuthController],
   providers: [AuthService],

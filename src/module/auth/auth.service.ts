@@ -18,7 +18,7 @@ export class AuthService {
 
         const isPasswordMatched: boolean = await this.hashService.compared(currentUser.password,user.password)
         if (!isPasswordMatched) throw new UnauthorizedException;
-        const payload = { sub: user.id, fullname: user.fullname }
+        const payload = { id: user.id, fullname: user.fullname }
         return {
             access_token: await this.jwtService.signAsync(payload)
         };
