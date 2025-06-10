@@ -4,35 +4,29 @@ import {
   Body, 
   Patch,  
   Delete, 
-  Query, 
-  UseGuards, 
-  Req } from '@nestjs/common';
+  UseGuards} from '@nestjs/common';
 import { UsersService } from './users.service';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { ENDPOINTS } from 'src/constants/endpoint';
 import { AuthGuardService } from '../auth/guard/auth-guard.service';
-import { RoleGuardService } from '../auth/guard/role-guard.service';
 import { User } from 'src/common/decorators/user.decorator';
 
 @Controller('users')
+@UseGuards(AuthGuardService)
 export class UsersController {
   constructor(
     private readonly usersService: UsersService,
   ) {}
 
-  @UseGuards(AuthGuardService)
   @Get('/profile')
   findOneById(@User() user: any) {
     return this.usersService.findOneById(user.id);
   }
 
-  @UseGuards(AuthGuardService)
   @Patch('/update')
   update(@User() user: any, @Body() updateUserDto: UpdateUserDto) {
     return this.usersService.update(user.id, updateUserDto);
   }
 
-  @UseGuards(AuthGuardService)
   @Delete('/delete/me')
   remove(@User() user: any) {
     return this.usersService.remove(user.id);

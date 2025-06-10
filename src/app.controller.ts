@@ -7,7 +7,7 @@ import { CACHE_MANAGER } from '@nestjs/cache-manager';
 export class AppController {
   constructor(
     @Inject(CACHE_MANAGER) 
-    private cacheManager: Cache,
+    private readonly cacheManager: Cache,
     private readonly appService: AppService
   ) {}
 
