@@ -11,8 +11,8 @@ import { HashModule } from 'src/common/hash/hash.module';
     HashModule,
     JwtModule.register({
       secret: 'SECRET_KEY',
-      signOptions: { expiresIn: '24h' }
-    })
+      signOptions: { expiresIn: '24h' },
+    }),
   ],
   controllers: [AuthController],
   providers: [AuthService],

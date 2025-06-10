@@ -7,16 +7,9 @@ import { AuthGuardModule } from '../auth/guard/auth-guard.module';
 import { RoleGuardModule } from '../auth/guard/role-guard.module';
 
 @Module({
-  imports: [
-    DatabaseModule, 
-    AuthGuardModule,
-    RoleGuardModule
-  ],  
+  imports: [DatabaseModule, AuthGuardModule, RoleGuardModule],
   controllers: [UsersController],
-  providers: [
-    ...usersProviders,
-    UsersService,
-  ],
-  exports: [UsersService]
+  providers: [...usersProviders, UsersService],
+  exports: [UsersService],
 })
 export class UsersModule {}

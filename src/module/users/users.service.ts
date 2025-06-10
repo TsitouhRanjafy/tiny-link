@@ -6,11 +6,10 @@ import { User } from './entities/user.entity';
 
 @Injectable()
 export class UsersService {
-
   constructor(
     @Inject('USERS_REPOSITORY')
-    private readonly userRepository: Repository<User>
-  ){}
+    private readonly userRepository: Repository<User>,
+  ) {}
 
   create(userDto: CreateUserDto) {
     return this.userRepository.save(userDto);
@@ -22,32 +21,38 @@ export class UsersService {
         id: true,
         fullname: true,
         email: true,
-        password: isPublic
-      }
+        password: isPublic,
+      },
     });
   }
 
-  findOneById(id: number,isPublic: boolean = true): Promise<PublicUserDto | UserDto | null> {
-    return this.userRepository.findOne({ 
+  findOneById(
+    id: number,
+    isPublic: boolean = true,
+  ): Promise<PublicUserDto | UserDto | null> {
+    return this.userRepository.findOne({
       where: { id },
       select: {
         id: true,
         fullname: true,
         email: true,
-        password: !isPublic
-      }
+        password: !isPublic,
+      },
     });
   }
 
-  findOneByEmail(email: string,isPublic: boolean = false): Promise<PublicUserDto | UserDto | null> {
-    return this.userRepository.findOne({ 
+  findOneByEmail(
+    email: string,
+    isPublic: boolean = false,
+  ): Promise<PublicUserDto | UserDto | null> {
+    return this.userRepository.findOne({
       where: { email },
       select: {
         id: true,
         fullname: true,
         email: true,
-        password: isPublic
-      }
+        password: isPublic,
+      },
     });
   }
 

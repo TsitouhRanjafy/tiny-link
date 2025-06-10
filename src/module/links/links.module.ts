@@ -8,13 +8,8 @@ import { UsersModule } from '../users/users.module';
 import { AppCacheModule } from 'src/cache/caching.module';
 
 @Module({
-  imports: [
-    DatabaseModule,
-    AuthGuardModule,
-    UsersModule,
-    AppCacheModule
-  ],
+  imports: [DatabaseModule, AuthGuardModule, UsersModule, AppCacheModule],
   controllers: [LinksController],
-  providers: [...linksProviders,LinksService],
+  providers: [...linksProviders, LinksService],
 })
 export class LinksModule {}

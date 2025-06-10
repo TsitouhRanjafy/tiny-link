@@ -10,61 +10,63 @@ import { CACHE_MANAGER } from '@nestjs/cache-manager';
 
 @Injectable()
 export class LinksService {
-
   constructor(
     @Inject('LINKS_REPOSITORY')
     private readonly linksRepository: Repository<Link>,
     private readonly userService: UsersService,
     @Inject(CACHE_MANAGER)
-    private readonly cacheManager: Cache
-  ){}
+    private readonly cacheManager: Cache,
+  ) {}
 
-  async create(createLinkDto: CreateLinkDto,userId: number) {
-    const existingUser: PublicUserDto | null = await this.userService.findOneById(userId);
+  async create(createLinkDto: CreateLinkDto, userId: number) {
+    const existingUser: PublicUserDto | null =
+      await this.userService.findOneById(userId);
     if (!existingUser) throw new NotFoundException('User not found');
-    
-    const newLink: CreateLinkDto = {...createLinkDto, user: existingUser}
-    
+
+    const newLink: CreateLinkDto = { ...createLinkDto, user: existingUser };
+
     const savedLink = this.linksRepository.save(newLink);
-    await this.cacheManager.set(createLinkDto.tinyLink,createLinkDto.originLink);
+    await this.cacheManager.set(
+      createLinkDto.tinyLink,
+      createLinkDto.originLink,
+    );
     return savedLink;
   }
 
-  findManyByUserId(id: number){
+  findManyByUserId(id: number) {
     return this.linksRepository.find({
       where: {
         user: {
-          id: id
-        }
-      }
-    })
+          id: id,
+        },
+      },
+    });
   }
 
-  async findOne(id: number,userId: number) {
+  async findOne(id: number, userId: number) {
     const myLink: LinkDto | null = await this.linksRepository.findOne({
       where: {
         user: {
-          id: userId
+          id: userId,
         },
-        id: id
+        id: id,
       },
     });
 
     if (myLink) return myLink;
-    throw new NotFoundException("Link not found");
+    throw new NotFoundException('Link not found');
   }
 
   findAll() {
     return this.linksRepository.find();
   }
 
-
-
   update(id: number, updateLinkDto: UpdateLinkDto) {
     return `This action updates a #${id} link`;
   }
 
-  remove(id: number,userId: number) {
-    return this.linksRepository.delete({id: id, user: { id: userId }});
+  async removeOneByTinylink(tinyLink: string, userId: number) {
+    await this.cacheManager.del(tinyLink);
+    return this.linksRepository.delete({ tinyLink, user: { id: userId } });
   }
 }
